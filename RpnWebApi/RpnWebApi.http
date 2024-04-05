@@ -1,0 +1,6 @@
+@RpnWebApi_HostAddress = http://localhost:5049
+
+GET {{RpnWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
