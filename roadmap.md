@@ -1,0 +1,5 @@
+- Adding some properties to track creation and modification dates and may be the user
+- Adding connection to real database and store in it all data
+- Adding caching within redis to assure persistency of data
+- Adding another operator which is %
+- Adding some loggers
