@@ -69,7 +69,7 @@ public class RpnController : Controller
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Problem with user's input", typeof(ProblemDetails))]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Something has gone wrong on the web api’s server", typeof(ProblemDetails))]
     [HttpDelete("rpn/stack/{stackId}")]
-    public async Task<IActionResult> DeleteEntities(Guid stackId)
+    public async Task<IActionResult> DeleteStack(Guid stackId)
     {
         await this.rpnService.DeleteStack(stackId);
         return this.NoContent();

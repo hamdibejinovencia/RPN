@@ -34,6 +34,10 @@ public partial class RpnContext : DbContext
     public async Task<Stack> GetStack(Guid stackId)
     {
         var stack = this.Stacks.FirstOrDefault(x => x.StackId == stackId);
+        if (stack is null)
+        {
+            throw new UserInputException($"There is no stack with the id : {stackId}.");
+        }
         return stack;
     }
     
