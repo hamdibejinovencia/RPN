@@ -7,7 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>RpnApi.Tests__</RootNamespace>
+        <RootNamespace>RpnApi.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

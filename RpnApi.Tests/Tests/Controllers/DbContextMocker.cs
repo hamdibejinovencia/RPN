@@ -1,8 +1,8 @@
+namespace RpnApi.Tests.Tests.Controllers;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Rpn.Api.Data;
-
-namespace RpnApi.Tests.Tests.Controllers;
 
 public static class DbContextMocker
 {
