@@ -231,7 +231,7 @@ public class RpnControllerTests
         await this._service.AddValueToStack(stack.StackId, op2);
 
         // Act
-        var actual = await this._service.ApplyOperand('/', stack.StackId);
+        var actual = await this._service.ApplyOperand(':', stack.StackId);
 
         // Assert
         Assert.Equal((Convert.ToInt32(op2) / Convert.ToInt32(op1)).ToString(), actual.Elements.Pop());
@@ -248,10 +248,10 @@ public class RpnControllerTests
         await this._service.AddValueToStack(stack.StackId, op2);
 
         // Act
-        var actual = await this._service.ApplyOperand('/', stack.StackId);
+        var actual = await this._service.ApplyOperand('*', stack.StackId);
 
         // Assert
-        Assert.Equal((Convert.ToInt32(op2) / Convert.ToInt32(op1)).ToString(), actual.Elements.Pop());
+        Assert.Equal((Convert.ToInt32(op2) * Convert.ToInt32(op1)).ToString(), actual.Elements.Pop());
     }
 
     [Fact]
@@ -276,6 +276,6 @@ public class RpnControllerTests
         var values = response?.Value as IEnumerable<char>;
 
         // Assert
-        Assert.Equal(new List<char>() { '+', '-', '/', '*' }, values);
+        Assert.Equal(new List<char>() { '+', '-', ':', '*' }, values);
     }
 }

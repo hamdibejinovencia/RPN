@@ -7,7 +7,7 @@ using Rpn.Api.Domain.Entities;
 public partial class RpnContext(DbContextOptions<RpnContext> options) : DbContext(options)
 {
     public IList<Stack> Stacks { get; init; } = [];
-    public IList<char> Operands { get; init; } = ['+', '-', '/', '*'];
+    public IList<char> Operands { get; init; } = ['+', '-', ':', '*'];
 
     public async Task<IEnumerable<char>> GetOperands()
     {
@@ -65,7 +65,7 @@ public partial class RpnContext(DbContextOptions<RpnContext> options) : DbContex
                 case '*':
                     stack.Elements.Push((Convert.ToInt32(op1) * Convert.ToInt32(op2)).ToString());
                     break;
-                case '/':
+                case ':':
                     stack.Elements.Push((Convert.ToInt32(op1) / Convert.ToInt32(op2)).ToString());
                     break;
                 default:
