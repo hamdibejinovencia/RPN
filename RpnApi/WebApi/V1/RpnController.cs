@@ -1,4 +1,5 @@
 namespace Rpn.Api.WebApi.V1;
+
 using Rpn.Api.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -9,9 +10,9 @@ using Rpn.Api.Domain.Entities;
 [Route("api/v{version:apiVersion}/rpn/")]
 public class RpnController : Controller
 {
-    private readonly IRpnService rpnService;
+    private readonly IRpnService _rpnService;
 
-    public RpnController(IRpnService rpnService) => this.rpnService = rpnService;
+    public RpnController(IRpnService rpnService) => this._rpnService = rpnService;
     
     #region operands
     [MapToApiVersion("1.0")]
@@ -22,7 +23,7 @@ public class RpnController : Controller
     [HttpGet("op")]
     public async Task<IActionResult> GetOperands()
     {
-        var operands = await this.rpnService.GetOperands();
+        var operands = await this._rpnService.GetOperands();
         return this.Ok(operands);
     }
     #endregion
@@ -36,7 +37,7 @@ public class RpnController : Controller
     [HttpPost("op/{op}/stack/{stackId}")]
     public async Task<IActionResult> PushValue(char op, Guid stackId)
     {
-        var stack = await this.rpnService.ApplyOperand(op,stackId);
+        var stack = await this._rpnService.ApplyOperand(op,stackId);
         return this.Created("", new { stack });
     }
     
@@ -47,7 +48,7 @@ public class RpnController : Controller
     [HttpPost("stack")]
     public async Task<IActionResult> PostStack()
     {
-        var createdStack = await this.rpnService.CreateStack();
+        var createdStack = await this._rpnService.CreateStack();
         return this.Created("", new { createdStack });
     }
     
@@ -59,7 +60,7 @@ public class RpnController : Controller
     [HttpGet("stack")]
     public async Task<IActionResult> GetStacks()
     {
-        var stacks = await this.rpnService.GetStacks();
+        var stacks = await this._rpnService.GetStacks();
         return this.Ok(stacks);
     }
     
@@ -71,7 +72,7 @@ public class RpnController : Controller
     [HttpDelete("stack/{stackId}")]
     public async Task<IActionResult> DeleteStack(Guid stackId)
     {
-        await this.rpnService.DeleteStack(stackId);
+        await this._rpnService.DeleteStack(stackId);
         return this.NoContent();
     }
     
@@ -83,7 +84,7 @@ public class RpnController : Controller
     [HttpPost("stack/{stackId}")]
     public async Task<IActionResult> PushValue(Guid stackId, [FromBody] string value)
     {
-        var stack = await this.rpnService.AddValueToStack(stackId,value);
+        var stack = await this._rpnService.AddValueToStack(stackId,value);
         return this.Created("", new { stack });
     }
     
@@ -95,7 +96,7 @@ public class RpnController : Controller
     [HttpGet("stack/{stackId}")]
     public async Task<IActionResult> GetStack(Guid stackId)
     {
-        var stacks = await this.rpnService.GetStack(stackId);
+        var stacks = await this._rpnService.GetStack(stackId);
         return this.Ok(stacks);
     }
     #endregion

@@ -1,7 +1,6 @@
-using Rpn.Api.Data.Exceptions;
-
 namespace Rpn.Api.Domain.Services;
 
+using Rpn.Api.Data.Exceptions;
 using Rpn.Api.Data;
 using Rpn.Api.Domain.Entities;
 
