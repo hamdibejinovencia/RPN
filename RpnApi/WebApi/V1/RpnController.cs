@@ -33,7 +33,7 @@ public class RpnController : Controller
     [SwaggerResponse(StatusCodes.Status201Created, "Successful operand's application")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Problem with user's input", typeof(ProblemDetails))]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Something has gone wrong on the web api’s server", typeof(ProblemDetails))]
-    [HttpPost("rpn/op/{op}/stack/{stackId}")]
+    [HttpPost("op/{op}/stack/{stackId}")]
     public async Task<IActionResult> PushValue(char op, Guid stackId)
     {
         var stack = await this.rpnService.ApplyOperand(op,stackId);
@@ -68,7 +68,7 @@ public class RpnController : Controller
     [SwaggerResponse(StatusCodes.Status204NoContent, "Stack have been deleted")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Problem with user's input", typeof(ProblemDetails))]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Something has gone wrong on the web api’s server", typeof(ProblemDetails))]
-    [HttpDelete("rpn/stack/{stackId}")]
+    [HttpDelete("stack/{stackId}")]
     public async Task<IActionResult> DeleteStack(Guid stackId)
     {
         await this.rpnService.DeleteStack(stackId);
@@ -80,7 +80,7 @@ public class RpnController : Controller
     [SwaggerResponse(StatusCodes.Status201Created, "Successful push of the value")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Problem with user's input", typeof(ProblemDetails))]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Something has gone wrong on the web api’s server", typeof(ProblemDetails))]
-    [HttpPost("rpn/stack/{stackId}")]
+    [HttpPost("stack/{stackId}")]
     public async Task<IActionResult> PushValue(Guid stackId, [FromBody] string value)
     {
         var stack = await this.rpnService.AddValueToStack(stackId,value);
