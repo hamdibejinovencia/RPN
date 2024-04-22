@@ -10,8 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x => { x.EnableAnnotations(); });
 builder.Services.AddControllers();
-builder.Services.AddDbContext<RpnContext>(x => x.UseInMemoryDatabase($"Database{Guid.NewGuid()}"),
-    ServiceLifetime.Singleton);
+/*builder.Services.AddDbContext<RpnContext>(x => x.UseInMemoryDatabase($"Database{Guid.NewGuid()}"),
+    ServiceLifetime.Singleton);*/
+
+builder.Services.AddDbContext<RpnDbContext>();
+    
 builder.Services.AddScoped<IRpnService, RpnService>();
 builder.Services.AddApiVersioning(setup =>
 {
@@ -25,7 +28,25 @@ builder.Services.AddVersionedApiExplorer(setup =>
     setup.SubstituteApiVersionInUrl = true;
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("VpCredPolicy",
+        builder =>
+        {
+            builder.SetIsOriginAllowed(
+                    origin =>
+                        new Uri(origin).Host == "localhost")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .Build();
+        });
+});
+
+
 var app = builder.Build();
+
+app.UseCors("VpCredPolicy");
 
 app.UseSwagger();
 app.UseSwaggerUI();

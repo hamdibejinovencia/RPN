@@ -14,7 +14,7 @@ public class RpnControllerTests
     private readonly RpnController _controller;
     private readonly RpnService _service;
     private readonly ILogger<RpnService> _logger;
-    private readonly RpnContext _dbContext;
+    private readonly RpnDbContext _dbDbContext;
     private static Random _random = new Random();
 
     private static string RandomNumber(int length)
@@ -26,8 +26,8 @@ public class RpnControllerTests
     public RpnControllerTests()
     {
         this._logger = Substitute.For<ILogger<RpnService>>();
-        this._dbContext = DbContextMocker.GetRpnDbContext(Guid.NewGuid().ToString());
-        this._service = new RpnService(this._logger, this._dbContext);
+        this._dbDbContext = DbContextMocker.GetRpnDbContext(Guid.NewGuid().ToString());
+        this._service = new RpnService(this._logger, this._dbDbContext);
         this._controller = new RpnController(this._service);
     }
 

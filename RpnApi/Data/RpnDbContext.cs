@@ -4,8 +4,19 @@ using Rpn.Api.Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Rpn.Api.Domain.Entities;
 
-public partial class RpnContext(DbContextOptions<RpnContext> options) : DbContext(options)
+public partial class RpnDbContext(DbContextOptions<RpnDbContext> options) : DbContext(options)
 {
+    public DbSet<Stack> T_Stacks { get; set; } = default!;
+    //public DbSet<Item> T_Items { get; set; } = default!;
+
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(
+            "Server=localhost;Database=RPN;User Id=sa;Password=HamdiBEJI#200584;trustServerCertificate=true;Initial Catalog=RPN;Encrypt=False");
+        base.OnConfiguring(optionsBuilder);
+        
+    }
     public IList<Stack> Stacks { get; init; } = [];
     public IList<char> Operands { get; init; } = ['+', '-', ':', '*'];
 

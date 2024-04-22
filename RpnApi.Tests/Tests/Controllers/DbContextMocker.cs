@@ -6,15 +6,15 @@ using Rpn.Api.Data;
 
 public static class DbContextMocker
 {
-    public static RpnContext GetRpnDbContext(string dbName)
+    public static RpnDbContext GetRpnDbContext(string dbName)
     {
         // Create options for DbContext instance
-        var options = new DbContextOptionsBuilder<RpnContext>()
+        var options = new DbContextOptionsBuilder<RpnDbContext>()
             .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).EnableSensitiveDataLogging().Options;
 
         // Create instance of DbContext
-        var dbContext = new RpnContext(options);
+        var dbContext = new RpnDbContext(options);
         return dbContext;
     }
 }

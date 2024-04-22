@@ -18,27 +18,27 @@ public interface IRpnService
 public class RpnService : IRpnService
 {
     private readonly ILogger logger;
-    private readonly RpnContext context;
+    private readonly RpnDbContext _dbContext;
 
-    public RpnService(ILogger<RpnService> logger, RpnContext context)
+    public RpnService(ILogger<RpnService> logger, RpnDbContext dbContext)
     {
         this.logger = logger;
-        this.context = context;
+        this._dbContext = dbContext;
     }
 
     public async Task<IEnumerable<char>> GetOperands()
     {
-        return await context.GetOperands();
+        return await _dbContext.GetOperands();
     }
 
     public async Task<IEnumerable<Stack>> GetStacks()
     {
-        return await context.GetStacks();
+        return await _dbContext.GetStacks();
     }
 
     public async Task<Stack> CreateStack()
     {
-        return await context.CreateStack();
+        return await _dbContext.CreateStack();
     }
 
     public async Task<Stack> AddValueToStack(Guid stackId, string value)
@@ -50,36 +50,36 @@ public class RpnService : IRpnService
             throw new UserInputException($"The value you push must be numeric.");
         }
 
-        var stack = await context.GetStack(stackId);
+        var stack = await _dbContext.GetStack(stackId);
         if (stack is null)
         {
             throw new UserInputException($"There is no stack with the id : {stackId}.");
         }
 
-        return await context.AddValueToStack(stack, value);
+        return await _dbContext.AddValueToStack(stack, value);
     }
 
     public async Task DeleteStack(Guid stackId)
     {
-        var stack = await context.GetStack(stackId);
+        var stack = await _dbContext.GetStack(stackId);
         if (stack is null)
         {
             throw new UserInputException($"There is no stack with the id : {stackId}.");
         }
 
-        await context.DeleteStack(stack);
+        await _dbContext.DeleteStack(stack);
     }
 
     public async Task<Stack> ApplyOperand(char op, Guid stackId)
     {
         // The value to push must be an operator (+,-,/,*)
-        var operands = await context.GetOperands();
+        var operands = await _dbContext.GetOperands();
         if (!operands.Any(x => x == op))
         {
             throw new UserInputException($"The operator you have entered is not valid.");
         }
 
-        var stack = await context.GetStack(stackId);
+        var stack = await _dbContext.GetStack(stackId);
         if (stack is null)
         {
             throw new UserInputException($"There is no stack with the id : {stackId}.");
@@ -91,11 +91,11 @@ public class RpnService : IRpnService
             throw new UserInputException($"You can't pop from stack as it contains less than two elements.");
         }
 
-        return await context.ApplyOperand(op, stack);
+        return await _dbContext.ApplyOperand(op, stack);
     }
 
     public async Task<Stack> GetStack(Guid stackId)
     {
-        return await context.GetStack(stackId);
+        return await _dbContext.GetStack(stackId);
     }
 }

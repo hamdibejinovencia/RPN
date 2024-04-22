@@ -6,7 +6,7 @@ namespace Rpn.Api.Data.Queries
 {
     public static class RpnQueries
     {
-        public static IEnumerable<Stack> GetStacks(this RpnContext context) =>
-        context.Stacks;
+        public static IEnumerable<Stack> GetStacks(this RpnDbContext dbContext) =>
+        dbContext.Stacks;
     }
 }
