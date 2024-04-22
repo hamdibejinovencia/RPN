@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpnApi", "RpnApi\RpnApi.csproj", "{CA45CF5F-1F9E-4683-8215-BDC94A0AEA3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpnApi.Tests", "RpnApi.Tests\RpnApi.Tests.csproj", "{5CC47AB7-0987-4B78-A82B-0AC7B36599A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpnApi.Tests", "RpnApi.Tests\RpnApi.Tests.csproj", "{5CC47AB7-0987-4B78-A82B-0AC7B36599A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C211B5DF-1E67-48C8-AD37-8FBAFB33B2C7}"
 EndProject
