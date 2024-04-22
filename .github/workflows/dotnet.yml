@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build ./RpnApi/RpnApi.csproj --no-restore
     - name: Test
-      run: dotnet test ./RpnApi.Tests/RpnApi.Tests.csproj --no-build --verbosity normal
+      run: dotnet test ./RpnApi.Tests/RpnApi.Tests.csproj #--no-build --verbosity normal
